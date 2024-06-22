@@ -14,6 +14,7 @@ logger = logging.getLogger()
 
 # Judul Halaman
 st.title('Prediksi Harga Saham')
+st.subheader('Emitmen : BMRI')
 st.subheader('Kelompok 9:')
 st.text('1. Nur Andriansyah (1301213475)')
 st.text('2. Rey Reno Alvaro Ikhsan (1301213268)')
