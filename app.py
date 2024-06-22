@@ -14,7 +14,7 @@ logger = logging.getLogger()
 
 # Judul Halaman
 st.title('Prediksi Harga Saham')
-st.subheader('Kelompok: Andri, Rey, Rivan, Fadli')
+st.subheader('Kelompok: 1301213475 Andri, 1301213268 Rey Reno Alvaro Ikhsan, 1301210554 Rivan Fauzan, Fadli')
 
 # Parameter Input
 st.sidebar.header('Parameter Simulasi')
