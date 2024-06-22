@@ -23,6 +23,7 @@ start_date = st.sidebar.date_input('Tanggal Mulai', date(2022, 6, 1))
 end_date = st.sidebar.date_input('Tanggal Akhir', date(2024, 6, 1))
 num_simulations = st.sidebar.number_input('Jumlah Simulasi', min_value=1, value=100)
 time_horizon = st.sidebar.number_input('Jangka Waktu (Hari)', min_value=1, value=30)
+seed = st.sidebar.number_input('Seed (opsional)', value=42)
 
 # Pengumpulan data
 try:
@@ -35,7 +36,7 @@ except Exception as e:
 
 # Proses data hanya jika berhasil diunduh
 if not data.empty:
-    data = data[['Close', 'Volume']].copy()  # Membuat salinan independen dari DataFrame
+    data = data[['Close', 'Volume']].copy() 
     data.reset_index(inplace=True)
 
     # Cek missing values
@@ -54,7 +55,8 @@ if not data.empty:
     data.dropna(inplace=True)
 
     # Fungsi untuk menjalankan simulasi GBM
-    def run_gbm_simulation(data, num_simulations, time_horizon):
+    def run_gbm_simulation(data, num_simulations, time_horizon, seed):
+        np.random.seed(seed)  # Set seed here for reproducibility
         last_price = data['Close'].iloc[-1]
         simulations = np.zeros((time_horizon, num_simulations))
         for i in range(num_simulations):
@@ -69,7 +71,7 @@ if not data.empty:
         return simulations
 
     # Jalankan simulasi
-    simulations = run_gbm_simulation(data, num_simulations, time_horizon)
+    simulations = run_gbm_simulation(data, num_simulations, time_horizon, seed)
 
     # Plot hasil simulasi
     st.subheader('Hasil Simulasi')
